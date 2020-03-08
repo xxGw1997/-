@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+    <div>
+        <button onclick="testReq1()">请求1</button>
+        <button onclick="testReq2()">请求2</button>
+        <button onclick="testCancel()">取消</button>
+    </div>
+    <script src="https://cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
+    <script>
+        let cancel
+        function testReq1(){
+            axios({
+                url:'http://localhost:3000/posts/1',
+                canelToken:new axios.CancelToken(c=>{
+                    //c是用于取消当前请求的函数
+                    //保存取消请求函数，用于之后可能取消当前请求
+                    cancel = c
+                })
+            }).then(
+                response=>{
+                    cancel = null
+                    console.log('请求1成功',response.data)
+                },
+                error=>{
+                    cancel = null
+                    console.log(error.message)
+                }
+            )
+        }
+
+        function testReq2(){
+
+        }
+
+        function testCancel(){
+            //执行取消请求的函数
+            if(typeof cancel === 'function'){
+                cancel('强制取消请求')
+            }else{
+                console.log('没有可取消的请求')
+            }
+        }
+    </script>
+    </body>
+</html>

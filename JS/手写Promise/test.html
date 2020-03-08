@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="Promise.js"></script>
+</head>
+<body>
+    
+</body>
+<script>
+    let p = new _Promise((resolve,reject)=>{
+        // resolve('解决');
+        setTimeout(() => {
+            resolve('sb');
+            console.log("轩轩国王")
+        }, 1000);
+    }).then(
+    value=>{
+        console.log('value:' + value);
+        throw new Error('fail');
+        return '杨文轩';
+    },
+    reason=>{
+        console.log('reason:'+ reason);
+        return '杨文轩2';
+    }
+    ).then(
+        value=>{
+            console.log('value2:'+ value);
+        },
+        reason=>{
+            console.log('reason:' + reason);
+        }
+    );
+    console.log("xxgw")
+</script>
+</html>

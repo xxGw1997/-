@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+    <script>
+        let module = (function(){
+            const moduleList = {}
+            function define(name,modules,action){
+                modules.map((m,i)=>{
+                    moduleList[i] = moduleList[m]
+                })
+                moduleList[name] = action.apply(null,modules)
+                console.log(moduleList)
+            }
+            return {define}
+        })()
+
+        module.define("bijiao",[],function(){
+            return {
+                first(arr){
+                    return arr[0]
+                },
+                max(arr,key){
+                    return arr.sort((a,b)=>b[key]-a[key])[0]
+                }
+            }
+        })
+
+        module.define("person",['bijiao'],function(bj){
+            let data = [
+                {name:'ywx',age:21},
+                {name:'xxgw',age:23}
+            ]
+            
+            console.log(bj.max(data,'age'))
+        })
+
+
+
+    </script>
+    </body>
+</html>

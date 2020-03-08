@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        
+    </body>
+    <script>
+        window.onload = function(){
+            let res;
+            let arr = [1,2,3,4,5];
+
+            //pop():删除数组最后一个元素，并且返回这个元素，改变原数组
+            let arr1 = [...arr];
+            res = arr1.pop();
+            console.log("返回结果res:",res);
+            console.log("arr_pop():",arr1);
+            console.log("                                              ")
+
+            //shift():删除数组第一个元素，并且返回这个元素，改变原数组
+            let arr4 = [...arr];
+            res = arr4.shift();
+            console.log("返回结果res:",res);
+            console.log("arr_shift():",arr4);
+            console.log("                                              ")
+
+            //push():在数组最后添加一个或多个元素,并且返回添加后数组的长度，改变原数组
+            let arr2 = [...arr];
+            res = arr2.push(6,8);
+            console.log("返回结果res:",res);
+            console.log("arr_push():",arr2);
+            console.log("                                              ")
+            
+            //unshift():在数组最前面添加一个或多个元素，并且返回添加后数组的长度，改变远数组
+            let arr5 = [...arr];
+            res = arr5.unshift(6,8);
+            console.log("返回结果res:",res);
+            console.log("arr_unshift():",arr5);
+            console.log("                                              ")
+            
+            //reverse():颠倒数组顺序,并且返回颠倒后的数组，改变原数组
+            let arr3 = [...arr];
+            res = arr3.reverse();
+            console.log("返回结果res:",res);
+            console.log("arr_reverse():",arr3);
+            console.log("                                              ")
+
+            //sort():排序数组，参数可以传入自定义排列方法，该方法返回小于0即升序，反之,sort()返回排序后的数组，改变原数组
+            let arr6 = [...arr];
+            res = arr6.sort((a,b)=>{
+                return b-a;
+            });
+            console.log("返回结果res:",res);
+            console.log("arr_sort():",arr6);
+            console.log("                                              ")
+
+            //splice():通过删除或替换现有元素或者原地添加新的元素来修改数组,并以数组形式返回被删除的内容。改变原数组
+            let arr7 = [...arr];
+            res = arr7.splice(2,3,...arr);          //从下标2开始，删除3个元素，再添加arr数组的元素
+            console.log("返回结果res:",res);
+            console.log("arr_splice():",arr7);
+
+            res = [...arr].splice(-2,0,100);        //从倒数第2个元素开始，删除0个元素，再添加"100"元素
+            console.log("返回结果res:",res);
+            console.log("arr_splice():",arr7);
+            console.log("                                              ")
+
+            //concat():合并一个或多个数组或元素，并且返回一个新的数组。不改变原数组
+            let arr8 = [...arr];
+            res = arr8.concat(1,2,arr);
+            console.log("返回结果res:",res);
+            console.log("arr_concat():",arr8);
+            console.log("                                              ")
+
+            //join():将一个数组的所有元素用一个字符串进行连接起来，并且返回这个连接后的字符串结果。不改变原数组
+            let arr9 = [...arr];
+            res = arr9.join(' to ');
+            console.log("返回结果res:",res);
+            console.log("arr_join():",arr9);
+            console.log("                                              ")
+
+            //slice():将一个数组中一段元素截取并且返回，含头不含尾。不改变原数组
+            let arr10 = [...arr];
+            res = arr10.slice(2,4);
+            console.log("返回结果res:",res);
+            console.log("arr_slice():",arr10);
+            console.log("                                              ")
+
+            //forEach():迭代方法,对数组的每个元素执行一次提供的函数，函数参数:(当前元素,当前下标,当前遍历数组)，返回undefined。不改变原数组  
+            let arr11 = [...arr];
+            res = arr11.forEach((ele,index,arr)=>{
+                ele*=2;
+                console.log(ele,index,arr);
+            })
+            console.log("返回结果res:",res);
+            console.log("arr.forEach():",arr11);
+            console.log("                                              ")
+
+            //filter():迭代方法,对数组的每个元素执行一次提供的函数，函数参数:(当前元素,当前下标,当前遍历数组)，返回符合提供函数条件的元素数组。不改变原数组
+            let arr12 = [...arr];
+            res = arr12.filter((ele,index,arr12)=>{
+                return ele%2===0;
+            })
+            console.log("返回结果res:",res);
+            console.log("arr.filter():",arr12);
+            console.log("                                              ")
+
+            //map():
+            let arr13 = [...arr];
+            res = arr13.map((ele,index,arr)=>{
+                return ele*100;
+            })
+            console.log("返回结果res:",res);
+            console.log("arr.map():",arr13);
+            console.log("                                              ")
+        }
+    </script>
+</html>

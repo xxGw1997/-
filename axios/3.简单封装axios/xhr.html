@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <button onclick="testGet()">get</button>
+        <button onclick="testPost()">post</button>
+        <button onclick="testPut()">put</button>
+        <button onclick="testDelete()">delete</button>
+    </div>
+<script>
+    function testGet(){
+        axios({
+            url:'http://localhost:3000/posts',
+            method:'GET',
+            params:{
+                id:1,
+                xxx:'ywx'
+            }
+        }).then(
+            response=>{
+                console.log(response)
+            },
+            error=>{
+                alert(error.message)
+            }
+        )
+    }
+
+    function testPost(){
+        axios({
+            url:'http://localhost:3000/posts',
+            method:'POST',
+            data:{
+                "title": "json-server---ywx",
+                "author": "ywx"
+            }
+        }).then(
+            response=>{
+                console.log(response)
+            },
+            error=>{
+                alert(error.msg)
+            }
+        )
+    }
+
+
+    function axios({
+        url,
+        method='GET',
+        params={},
+        data={}
+    }){
+        //返回一个promise对象
+        return new Promise((resolve,reject)=>{
+
+            //处理query参数(拼接到url上)
+            let queryString = ''
+            Object.keys(params).forEach(key=>{
+                queryString+=`${key}=${params[key]}&`
+            })
+            if(queryString){
+                queryString = queryString.substring(0,queryString.length-1)
+                //接到url
+                url += '?' + queryString
+            }
+            //1、执行器函数执行异步任务发送ajax请求
+            //创建xhr对象
+            const xhr = new XMLHttpRequest()
+            //打开连接
+            xhr.open(method,url)
+            if(method==='GET'){
+                xhr.send(null)
+            }else if(method==='POST'){
+                xhr.setRequestHeader('Content-Type','application/json;charset=utf-8')   //告诉服务器请求体格式json
+                xhr.send(JSON.stringify(data))
+            }else{
+
+            }
+            xhr.onreadystatechange = ()=>{
+                if(xhr.readyState!==4){
+                    return
+                }
+                //响应状态在200-299之间代表成功,否则失败
+                const {status,statusText} = xhr
+                //2.1、成功
+                if(status>=200 && status<=299){
+                    const response = {
+                        data : JSON.parse(xhr.response),
+                        status,
+                        statusText
+                    }
+                    resolve(response)
+                }else{
+                //2.2、失败
+                    reject(new Error('request error status is' + status))
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>
