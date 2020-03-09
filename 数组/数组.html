@@ -99,6 +99,39 @@
             console.log("arr.forEach():",arr11);
             console.log("                                              ")
 
+            arr11 = [{
+                        key: '01',
+                        value: '西施'
+                    }, {
+                        key: '02',
+                        value: '王昭君'
+                    }, {
+                        key: '03',
+                        value: '杨玉环'
+                    }, {
+                        key: '04',
+                        value: '貂蝉'
+                    }, {
+                        key: '01',
+                        value: '西施'
+                    }, {
+                        key: '01',
+                        value: '西施'
+                    }]
+            
+            let finalResult = []
+            let attr = {}
+            arr11.forEach((ele,index,arr)=>{
+                if(!attr[ele.key]){
+                    attr[ele.key] = true
+                    finalResult.push(ele)
+                }
+            })
+            console.log("finalResult:",finalResult)
+
+
+
+
             //filter():迭代方法,对数组的每个元素执行一次提供的函数，函数参数:(当前元素,当前下标,当前遍历数组)，返回符合提供函数条件的元素数组。不改变原数组
             let arr12 = [...arr];
             res = arr12.filter((ele,index,arr12)=>{
@@ -108,6 +141,7 @@
             console.log("arr.filter():",arr12);
             console.log("                                              ")
 
+
             //map():
             let arr13 = [...arr];
             res = arr13.map((ele,index,arr)=>{
@@ -116,6 +150,15 @@
             console.log("返回结果res:",res);
             console.log("arr.map():",arr13);
             console.log("                                              ")
+
+            //reduce():迭代方法,对数组中每个元素执行一个reduce函数，并将结果汇总为一个值返回
+            //函数参数args(累计器函数,初始值)
+            //累计器函数参数(上一次调用回调时返回的累计值/初始值，当前元素，当前下标(可选)，源数组(可选))
+            let arr14 = [...arr];
+            let sum14 = arr14.reduce((acc,currentValue,index,arr)=>{
+                return acc + currentValue*10
+            },1000)
+            console.log("sum:",sum14)   //1000+ 10*1 + 10*2 + 10*3 + 10*4 + 10*5 = 1150
         }
     </script>
 </html>
